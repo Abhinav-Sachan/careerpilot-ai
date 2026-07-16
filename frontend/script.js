@@ -99,7 +99,8 @@ interviewButton.addEventListener("click", async () => {
   interviewButton.disabled = true;
 
   try {
-    let response = await fetch("https://careerpilot-ai-iwss.onrender.com/generate-prep", {
+    // FIX: Updated to match your exact backend endpoint
+    let response = await fetch("https://careerpilot-ai-iwss.onrender.com/generate-interview", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
