@@ -46,7 +46,7 @@ resumeButton.addEventListener("click", async () => {
   resumeReadout.querySelector(".readout-body").innerHTML = "Running analysis...";
 
   try {
-    let response = await fetch("http://127.0.0.1:8000/analyze-resume", {
+    let response = await fetch("https://careerpilot-ai-iwss.onrender.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -99,7 +99,7 @@ interviewButton.addEventListener("click", async () => {
   interviewButton.disabled = true;
 
   try {
-    let response = await fetch("http://127.0.0.1:8000/generate-interview", {
+    let response = await fetch("https://careerpilot-ai-iwss.onrender.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -151,7 +151,7 @@ roadmapButton.addEventListener("click", async () => {
   roadmapButton.disabled = true;
 
   try {
-    let response = await fetch("http://127.0.0.1:8000/generate-roadmap", {
+    let response = await fetch("https://careerpilot-ai-iwss.onrender.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
