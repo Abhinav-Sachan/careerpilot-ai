@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CareerPilot AI — Career Prep, Instrumented</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="hud-grid" aria-hidden="true"></div>
+
+
+<header class="site-header">
+
+    <div class="brand">
+
+        <div class="brand-text">
+
+            <h1>
+                CareerPilot<span class="accent">AI</span>
+            </h1>
+
+            <p class="tagline">
+                Flight-checked career preparation
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="status-readout">
+
+        <span class="status-dot"></span>
+
+        <span class="status-label">
+            SYSTEMS ONLINE
+        </span>
+
+    </div>
+
+
+</header>
+
+
+
+
+<nav class="module-nav">
+
+<button class="module-tab active" data-target="resume" type="button">
+<span class="tab-index">01</span>
+<span class="tab-name">Resume Scan</span>
+</button>
+
+<button class="module-tab" data-target="interview" type="button">
+<span class="tab-index">02</span>
+<span class="tab-name">Interview Coach</span>
+</button>
+
+<button class="module-tab" data-target="roadmap" type="button">
+<span class="tab-index">03</span>
+<span class="tab-name">Learning Roadmap</span>
+</button>
+
+<span class="tab-indicator" aria-hidden="true"></span>
+
+</nav>
+
+
+
+
+
+<main class="instrument-deck">
+
+
+
+<section class="module-panel active" id="resume">
+
+
+<div class="panel-corner">
+MODULE 01
+</div>
+
+
+
+<h2>
+Resume Analyzer
+</h2>
+
+
+
+<p class="panel-desc">
+
+Paste your resume text. Get a structured read on strengths, gaps, and what to fix before you hit send.
+
+</p>
+
+
+
+
+<label class="field-label">
+
+Resume text
+
+</label>
+
+
+
+<textarea 
+id="resumeInput"
+placeholder="Paste your resume here...">
+</textarea>
+
+
+
+
+<button 
+class="run-button"
+id="resumeButton"
+type="button">
+
+
+<span>
+Analyze Resume
+</span>
+
+
+</button>
+
+
+
+
+<div class="readout" id="resumeReadout">
+
+
+<div class="readout-header">
+
+<span class="readout-label">
+AI Readout
+</span>
+
+
+<span class="readout-cursor"></span>
+
+
+</div>
+
+
+
+<p class="readout-body">
+
+Awaiting input — paste a resume and run the scan.
+
+</p>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+<section class="module-panel" id="interview">
+
+
+<div class="panel-corner">
+MODULE 02
+</div>
+
+
+<h2>
+Interview Coach
+</h2>
+
+
+<p class="panel-desc">
+
+Name the role you're targeting. Get likely questions, strong sample answers, and what interviewers are actually scoring for.
+
+</p>
+
+
+<label class="field-label">
+
+Target job role
+
+</label>
+
+
+<input 
+type="text"
+id="roleInput"
+placeholder="e.g. Backend Engineer">
+
+
+<button 
+class="run-button"
+id="interviewButton">
+
+
+<span>
+Generate Interview Prep
+</span>
+
+
+</button>
+
+
+
+<div class="readout" id="interviewReadout">
+
+<div class="readout-header">
+
+<span class="readout-label">
+AI Readout
+</span>
+
+</div>
+
+
+<p class="readout-body">
+
+Awaiting input — enter a role and generate prep.
+
+</p>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+<section class="module-panel" id="roadmap">
+
+
+<div class="panel-corner">
+MODULE 03
+</div>
+
+
+<h2>
+Learning Roadmap Generator
+</h2>
+
+
+<p class="panel-desc">
+
+Name where you want to land. Get a staged path of skills, in the order that actually gets you hired.
+
+</p>
+
+
+
+<label class="field-label">
+
+Desired career role
+
+</label>
+
+
+
+<input
+type="text"
+id="careerInput"
+placeholder="e.g. Data Scientist">
+
+
+
+<button 
+class="run-button"
+id="roadmapButton">
+
+
+<span>
+Generate Roadmap
+</span>
+
+
+</button>
+
+
+
+
+<div class="readout" id="roadmapReadout">
+
+
+<div class="readout-header">
+
+<span class="readout-label">
+AI Readout
+</span>
+
+
+</div>
+
+
+
+<p class="readout-body">
+
+Awaiting input — enter a target role and build the roadmap.
+
+</p>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+</main>
+
+
+
+
+
+
+<footer class="site-footer">
+
+
+<p>
+
+CareerPilot AI — built phase by phase. Live AI responses connect in Phase 5.
+
+</p>
+
+
+</footer>
+
+
+
+
+
+<script src="script.js"></script>
+
+
+
+</body>
+
+</html>
