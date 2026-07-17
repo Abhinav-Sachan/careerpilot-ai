@@ -10,8 +10,9 @@ client = OpenAI(
     base_url="https://api.groq.com/openai/v1"
 )
 
-def ask_ai(prompt):
+def ask_ai_stream(prompt):
     try:
+        # Added stream=True to enable real-time token delivery
         completion = client.chat.completions.create(
             model="llama-3.3-70b-versatile",
             messages=[
@@ -19,10 +20,13 @@ def ask_ai(prompt):
                 {"role": "user", "content": prompt}
             ],
             temperature=0.7,
+            stream=True, 
         )
-        return completion.choices[0].message.content
+        
+        # Yield each chunk of text exactly when it arrives
+        for chunk in completion:
+            if chunk.choices[0].delta.content is not None:
+                yield chunk.choices[0].delta.content
+                
     except Exception as e:
-        return f"Error connecting to AI: {str(e)}"
-
-if __name__ == "__main__":
-    print(ask_ai("Say hello in one sentence"))
+        yield f"Error connecting to AI: {str(e)}"

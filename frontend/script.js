@@ -46,7 +46,6 @@ resumeButton.addEventListener("click", async () => {
   resumeReadout.querySelector(".readout-body").innerHTML = "Running analysis...";
 
   try {
-    // Relative URL handles environment routing dynamically
     let response = await fetch("/analyze-resume", {
       method: "POST",
       headers: {
@@ -57,22 +56,24 @@ resumeButton.addEventListener("click", async () => {
       }),
     });
 
-    let result = await response.json();
+    // Clear the loading text before streaming starts
+    resumeReadout.querySelector(".readout-body").innerHTML = "";
+
+    // Set up the stream reader
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder("utf-8");
+
+    // Read chunks as they arrive and append to the UI
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      
+      const chunk = decoder.decode(value, { stream: true });
+      resumeReadout.querySelector(".readout-body").innerHTML += chunk;
+    }
 
     resumeReadout.dataset.state = "done";
-    resumeReadout.querySelector(".readout-body").innerHTML = `
-      <h3>Skills</h3>
-      <p>${result.skills.join(", ")}</p>
-
-      <h3>Experience</h3>
-      <p>${result.experience}</p>
-
-      <h3>Summary</h3>
-      <p>${result.summary}</p>
-
-      <h3>Suggestions</h3>
-      <p>${result.suggestions.join(", ")}</p>
-    `;
+    
   } catch (error) {
     resumeReadout.dataset.state = "error";
     resumeReadout.querySelector(".readout-body").innerHTML =
@@ -100,7 +101,6 @@ interviewButton.addEventListener("click", async () => {
   interviewButton.disabled = true;
 
   try {
-    // Relative URL handles environment routing dynamically
     let response = await fetch("/generate-interview", {
       method: "POST",
       headers: {
@@ -111,19 +111,24 @@ interviewButton.addEventListener("click", async () => {
       }),
     });
 
-    let result = await response.json();
+    // Clear the loading text before streaming starts
+    interviewReadout.querySelector(".readout-body").innerHTML = "";
+
+    // Set up the stream reader
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder("utf-8");
+
+    // Read chunks as they arrive and append to the UI
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      
+      const chunk = decoder.decode(value, { stream: true });
+      interviewReadout.querySelector(".readout-body").innerHTML += chunk;
+    }
 
     interviewReadout.dataset.state = "done";
-    interviewReadout.querySelector(".readout-body").innerHTML = `
-      <h3>Common Questions</h3>
-      <ul>${result.questions.map(q => `<li>${q}</li>`).join("")}</ul>
-      
-      <h3>Sample Answers</h3>
-      <ul>${result.answers.map(a => `<li>${a}</li>`).join("")}</ul>
-      
-      <h3>Pro Tips</h3>
-      <ul>${result.tips.map(t => `<li>${t}</li>`).join("")}</ul>
-    `;
+    
   } catch (error) {
     interviewReadout.dataset.state = "error";
     interviewReadout.querySelector(".readout-body").innerHTML =
@@ -153,7 +158,6 @@ roadmapButton.addEventListener("click", async () => {
   roadmapButton.disabled = true;
 
   try {
-    // Relative URL handles environment routing dynamically
     let response = await fetch("/generate-roadmap", {
       method: "POST",
       headers: {
@@ -164,19 +168,24 @@ roadmapButton.addEventListener("click", async () => {
       }),
     });
 
-    let result = await response.json();
+    // Clear the loading text before streaming starts
+    roadmapReadout.querySelector(".readout-body").innerHTML = "";
+
+    // Set up the stream reader
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder("utf-8");
+
+    // Read chunks as they arrive and append to the UI
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      
+      const chunk = decoder.decode(value, { stream: true });
+      roadmapReadout.querySelector(".readout-body").innerHTML += chunk;
+    }
 
     roadmapReadout.dataset.state = "done";
-    roadmapReadout.querySelector(".readout-body").innerHTML = `
-      <h3>Steps</h3>
-      <ul>${result.steps.map(s => `<li>${s}</li>`).join("")}</ul>
-      
-      <h3>Recommended Resources</h3>
-      <ul>${result.resources.map(r => `<li>${r}</li>`).join("")}</ul>
-      
-      <h3>Projects to Build</h3>
-      <ul>${result.projects.map(p => `<li>${p}</li>`).join("")}</ul>
-    `;
+    
   } catch (error) {
     roadmapReadout.dataset.state = "error";
     roadmapReadout.querySelector(".readout-body").innerHTML =

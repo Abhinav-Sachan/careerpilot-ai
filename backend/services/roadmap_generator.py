@@ -1,35 +1,20 @@
-import json
-from services.ai_client import ask_ai
+from services.ai_client import ask_ai_stream
 
 def generate_learning_roadmap(career):
     prompt = f"""
     You are an expert career counselor and senior tech educator.
     Create a practical, step-by-step learning roadmap for someone who wants to become a: {career}
     
-    Return ONLY a raw JSON object with no markdown, no backticks, and no extra text.
+    Do NOT use JSON. Format your response cleanly using these exact text headings:
     
-    Structure:
-    {{
-        "steps": ["Step 1: [Topic] - [Brief detail]", "Step 2: [Topic] - [Brief detail]", "Step 3: [Topic] - [Brief detail]"],
-        "resources": ["Recommended Resource 1", "Recommended Resource 2", "Recommended Resource 3"],
-        "projects": ["Beginner Project Idea", "Advanced Project Idea"]
-    }}
+    STEPS:
+    (List the step-by-step process)
+    
+    RESOURCES:
+    (Recommend specific tools, courses, or books)
+    
+    PROJECTS TO BUILD:
+    (Suggest beginner and advanced projects)
     """
     
-    try:
-        response_text = ask_ai(prompt)
-        
-        # Clean up the response
-        clean_json = response_text.replace("```json", "").replace("```", "").strip()
-        return json.loads(clean_json)
-    
-    except Exception as e:
-        print("\n--- ERROR PARSING ROADMAP JSON ---")
-        print(str(e))
-        print("----------------------------------\n")
-        
-        return {
-            "steps": ["Could not generate roadmap steps at this time."],
-            "resources": ["N/A"],
-            "projects": ["Please try again."]
-        }
+    return ask_ai_stream(prompt)
